@@ -19,6 +19,12 @@ public class IndexController {
     @GetMapping("/")
     public String index() {
         System.out.println(restClient.getNodes());
+        boolean result = true;
+
+
+        if (result) {
+            throw new ArithmeticException("test");
+        }
         return "index page";
     }
 }
