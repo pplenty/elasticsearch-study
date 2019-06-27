@@ -13,8 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class IndexController {
 
-    @Autowired
+    final
     RestClient restClient;
+
+    @Autowired
+    public IndexController(RestClient restClient) {
+        this.restClient = restClient;
+    }
 
     @GetMapping("/")
     public String index() {
