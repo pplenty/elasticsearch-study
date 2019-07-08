@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
  * @author : yusik
  * @date : 2019-06-22
  */
-
 @RestController
 public class IndexController {
 
