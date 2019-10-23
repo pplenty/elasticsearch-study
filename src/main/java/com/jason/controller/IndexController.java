@@ -1,5 +1,6 @@
 package com.jason.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.admin.indices.alias.get.GetAliasesRequest;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClient;
@@ -13,27 +14,24 @@ import java.io.IOException;
  * @author : yusik
  * @date : 2019-06-22
  */
+@Slf4j
 @RestController
 public class IndexController {
 
-    final RestClient restClient;
-    final RestHighLevelClient restHighLevlClient;
+    private final RestClient restClient;
+    private final RestHighLevelClient restHighLevelClient;
 
-    public IndexController(RestClient restClient, RestHighLevelClient restHighLevlClient) {
+    public IndexController(RestClient restClient, RestHighLevelClient restHighLevelClient) {
         this.restClient = restClient;
-        this.restHighLevlClient = restHighLevlClient;
+        this.restHighLevelClient = restHighLevelClient;
     }
 
     @GetMapping("/")
     public String index() throws IOException {
-        System.out.println(restClient.getNodes());
-        boolean result = true;
 
-        System.out.println(restHighLevlClient.indices().getAlias(new GetAliasesRequest("*"), RequestOptions.DEFAULT).getAliases());
+        log.info("{}", restClient.getNodes());
+        log.info("{}", restHighLevelClient.indices().getAlias(new GetAliasesRequest("*"), RequestOptions.DEFAULT).getAliases());
 
-        if (result) {
-//            throw new ArithmeticException("test");
-        }
         return "index page";
     }
 }

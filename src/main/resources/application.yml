@@ -1,6 +1,12 @@
 server:
-  port: 8888
+  port: 9999
 
 elasticsearch:
     hosts: localhost
     port: 9200
+
+logging:
+  level:
+    root: info
+    com.jason: debug
+    org.elasticsearch: debug
