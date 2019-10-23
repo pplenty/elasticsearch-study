@@ -24,6 +24,11 @@ public class ElasticsearchConfig {
     private int port;
 
     @Bean
+    public EsClient getEsClient() {
+        return new EsClient();
+    }
+
+    @Bean
     public RestClient getRestClient() {
 
         List<HttpHost> hostList = new ArrayList<>();

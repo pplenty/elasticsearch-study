@@ -1,5 +1,7 @@
 package com.jason.controller;
 
+import com.jason.config.EsClient;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -25,22 +27,17 @@ import java.net.URISyntaxException;
  * Created by kohyusik on 23/10/2019.
  */
 @Slf4j
-@RequestMapping("/query")
 @RestController
+@RequiredArgsConstructor
+@RequestMapping("/query")
 public class QueryTestController {
 
-    @Value("${elasticsearch.hosts}")
-    private String host;
-
-    @Value("${elasticsearch.port}")
-    private int port;
+    private final EsClient esClient;
 
     @GetMapping("/")
     public String index() throws IOException, URISyntaxException {
 
-        HttpClient client = HttpClientBuilder.create().build();
-        HttpGet getRequest = new HttpGet();
-        URI uri = new URI("http", null, host, port, "/classes/_search", "q=\"{\n" +
+        String response = esClient.query("classes", "{\n" +
                 "  \"query\": {\n" +
                 "    \"term\": {\n" +
                 "      \"professor\": {\n" +
@@ -49,14 +46,8 @@ public class QueryTestController {
                 "    }\n" +
                 "  }\n" +
                 "  , \"_source\": []\n" +
-                "}\n\"", null);
-        getRequest.setURI(uri);
-        HttpResponse response = client.execute(getRequest);
-        ResponseHandler<String> handler = new BasicResponseHandler();
-        String body = handler.handleResponse(response);
-
-        log.debug("{}", uri.toString());
-        log.debug("{}", body);
+                "}");
+        log.debug("{}", response);
 
         return "index page";
     }
