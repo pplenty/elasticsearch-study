@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * Created by kohyusik on 23/10/2019.
@@ -50,5 +51,19 @@ public class QueryTestController {
         log.debug("{}", response);
 
         return "index page";
+    }
+
+    public static void main(String[] args) {
+        CompletableFuture.supplyAsync(() -> {
+            try {
+                Thread.sleep(1000);
+            }
+            catch (InterruptedException e) {
+
+            }
+
+            System.out.println(1);
+            return 1;
+        });
     }
 }

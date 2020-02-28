@@ -1,6 +1,11 @@
 pluginManagement {
 	repositories {
-		gradlePluginPortal()
+//		gradlePluginPortal()
+		maven {
+			url "http://mvn.tmon.co.kr/nexus3/repository/gradle-plugin/"
+		}
 	}
 }
 rootProject.name = 'elasticsearch-study'
+
+include 'java'

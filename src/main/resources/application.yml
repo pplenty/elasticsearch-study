@@ -2,8 +2,8 @@ server:
   port: 9999
 
 elasticsearch:
-    hosts: localhost
-    port: 9200
+    hosts: devmem2.tmonc.net
+    port: 19200
 
 logging:
   level:

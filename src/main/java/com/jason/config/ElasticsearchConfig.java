@@ -29,7 +29,7 @@ public class ElasticsearchConfig {
     }
 
     @Bean
-    public RestClient getRestClient() {
+    public RestClient restClient() {
 
         List<HttpHost> hostList = new ArrayList<>();
         for(String host : hosts) {
@@ -41,7 +41,7 @@ public class ElasticsearchConfig {
     }
 
     @Bean
-    public RestHighLevelClient getRestHighLevelClient() {
+    public RestHighLevelClient restHighLevelClient() {
 
         List<HttpHost> hostList = new ArrayList<>();
         for(String host : hosts) {
